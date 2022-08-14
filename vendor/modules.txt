@@ -188,8 +188,8 @@ github.com/bep/clock
 # github.com/bep/debounce v1.2.0
 ## explicit
 github.com/bep/debounce
-# github.com/bep/gitmap v1.1.2
-## explicit
+# github.com/bep/gitmap v1.3.0
+## explicit; go 1.18
 github.com/bep/gitmap
 # github.com/bep/goat v0.5.0
 ## explicit; go 1.17
