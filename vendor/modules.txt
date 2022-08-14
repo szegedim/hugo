@@ -185,7 +185,7 @@ github.com/aws/smithy-go/transport/http/internal/io
 # github.com/bep/clock v0.3.0
 ## explicit; go 1.18
 github.com/bep/clock
-# github.com/bep/debounce v1.2.0
+# github.com/bep/debounce v1.2.1
 ## explicit
 github.com/bep/debounce
 # github.com/bep/gitmap v1.1.2
