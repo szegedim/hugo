@@ -268,7 +268,7 @@ github.com/frankban/quicktest
 # github.com/fsnotify/fsnotify v1.5.4
 ## explicit; go 1.16
 github.com/fsnotify/fsnotify
-# github.com/getkin/kin-openapi v0.97.0
+# github.com/getkin/kin-openapi v0.102.0
 ## explicit; go 1.16
 github.com/getkin/kin-openapi/jsoninfo
 github.com/getkin/kin-openapi/openapi3
