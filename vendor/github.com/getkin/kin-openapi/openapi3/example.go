@@ -2,6 +2,7 @@ package openapi3
 
 import (
 	"context"
+	"errors"
 	"fmt"
 
 	"github.com/go-openapi/jsonpointer"
@@ -27,9 +28,9 @@ func (e Examples) JSONLookup(token string) (interface{}, error) {
 }
 
 // Example is specified by OpenAPI/Swagger 3.0 standard.
-// See https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md#exampleObject
+// See https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md#example-object
 type Example struct {
-	ExtensionProps
+	ExtensionProps `json:"-" yaml:"-"`
 
 	Summary       string      `json:"summary,omitempty" yaml:"summary,omitempty"`
 	Description   string      `json:"description,omitempty" yaml:"description,omitempty"`
@@ -54,6 +55,15 @@ func (example *Example) UnmarshalJSON(data []byte) error {
 }
 
 // Validate returns an error if Example does not comply with the OpenAPI spec.
-func (example *Example) Validate(ctx context.Context) error {
-	return nil // TODO
+func (example *Example) Validate(ctx context.Context, opts ...ValidationOption) error {
+	// ctx = WithValidationOptions(ctx, opts...)
+
+	if example.Value != nil && example.ExternalValue != "" {
+		return errors.New("value and externalValue are mutually exclusive")
+	}
+	if example.Value == nil && example.ExternalValue == "" {
+		return errors.New("no value or externalValue field")
+	}
+
+	return nil
 }

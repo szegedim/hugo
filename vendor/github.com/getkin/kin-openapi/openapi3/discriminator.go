@@ -7,9 +7,9 @@ import (
 )
 
 // Discriminator is specified by OpenAPI/Swagger standard version 3.
-// See https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md#discriminatorObject
+// See https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md#discriminator-object
 type Discriminator struct {
-	ExtensionProps
+	ExtensionProps `json:"-" yaml:"-"`
 
 	PropertyName string            `json:"propertyName" yaml:"propertyName"`
 	Mapping      map[string]string `json:"mapping,omitempty" yaml:"mapping,omitempty"`
@@ -26,6 +26,8 @@ func (discriminator *Discriminator) UnmarshalJSON(data []byte) error {
 }
 
 // Validate returns an error if Discriminator does not comply with the OpenAPI spec.
-func (discriminator *Discriminator) Validate(ctx context.Context) error {
+func (discriminator *Discriminator) Validate(ctx context.Context, opts ...ValidationOption) error {
+	// ctx = WithValidationOptions(ctx, opts...)
+
 	return nil
 }
