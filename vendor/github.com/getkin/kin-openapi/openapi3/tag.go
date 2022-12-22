@@ -20,7 +20,9 @@ func (tags Tags) Get(name string) *Tag {
 }
 
 // Validate returns an error if Tags does not comply with the OpenAPI spec.
-func (tags Tags) Validate(ctx context.Context) error {
+func (tags Tags) Validate(ctx context.Context, opts ...ValidationOption) error {
+	ctx = WithValidationOptions(ctx, opts...)
+
 	for _, v := range tags {
 		if err := v.Validate(ctx); err != nil {
 			return err
@@ -30,9 +32,9 @@ func (tags Tags) Validate(ctx context.Context) error {
 }
 
 // Tag is specified by OpenAPI/Swagger 3.0 standard.
-// See https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md#tagObject
+// See https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.3.md#tag-object
 type Tag struct {
-	ExtensionProps
+	ExtensionProps `json:"-" yaml:"-"`
 
 	Name         string        `json:"name,omitempty" yaml:"name,omitempty"`
 	Description  string        `json:"description,omitempty" yaml:"description,omitempty"`
@@ -50,7 +52,9 @@ func (t *Tag) UnmarshalJSON(data []byte) error {
 }
 
 // Validate returns an error if Tag does not comply with the OpenAPI spec.
-func (t *Tag) Validate(ctx context.Context) error {
+func (t *Tag) Validate(ctx context.Context, opts ...ValidationOption) error {
+	ctx = WithValidationOptions(ctx, opts...)
+
 	if v := t.ExternalDocs; v != nil {
 		if err := v.Validate(ctx); err != nil {
 			return fmt.Errorf("invalid external docs: %w", err)
